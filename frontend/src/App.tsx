@@ -31,7 +31,7 @@ function App() {
               <Clock size={16} color="white" />
             </div>
             <span style={{ fontWeight: 700, fontSize: 15, background: 'linear-gradient(90deg, #a5b4fc, #c084fc)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              ChronoSight
+              ForecastIQ
             </span>
           </div>
           <div style={{ display: 'flex', alignItems: 'center', gap: 8, padding: '6px 14px', borderRadius: 20, background: 'rgba(16,185,129,0.08)', border: '1px solid rgba(16,185,129,0.2)' }}>
