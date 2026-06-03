@@ -2,19 +2,65 @@
 
 ### AI-Powered Time Series Forecasting Platform
 
-ForecastIQ is a full-stack forecasting application that leverages Google's TimesFM foundation model to generate forecasts from historical time-series data.
+ForecastIQ is a full-stack forecasting application powered by Google's TimesFM foundation model. It enables users to generate forecasts from natural-language queries and visualize future trends through interactive dashboards, confidence intervals, and analytics.
 
-The platform combines a FastAPI backend, a React + TypeScript frontend, and a transformer-based forecasting engine to provide interactive predictions, confidence intervals, and trend analysis across multiple financial and economic datasets.
+The platform combines a FastAPI backend, a React + TypeScript frontend, and TimesFM-based inference to deliver forecasting capabilities across financial and economic datasets.
 
 Users can enter natural-language queries such as:
 
 * Apple stock price
-* Bitcoin price
+* Bitcoin price forecast
 * S&P 500 index
 * Airline passenger demand
 * Atmospheric CO₂ levels
 
 The system automatically retrieves historical data, generates forecasts using TimesFM, and visualizes results through interactive charts and analytics.
+
+---
+
+## Overview
+
+ForecastIQ transforms natural-language forecasting requests into interactive visual predictions.
+
+Users simply describe what they want to forecast, and the platform:
+
+1. Identifies the relevant data source.
+2. Retrieves historical time-series data.
+3. Generates forecasts using Google's TimesFM model.
+4. Calculates confidence intervals and trend metrics.
+5. Displays results through interactive visualizations.
+
+Supported use cases include:
+
+* Stock market forecasting
+* Cryptocurrency forecasting
+* Economic trend analysis
+* Demand forecasting
+* General time-series prediction
+
+---
+
+## Dashboard Preview
+
+<table>
+<tr>
+<td width="50%">
+<img src="screenshots/homepage.png" alt="Homepage Dashboard" width="100%">
+</td>
+<td width="50%">
+<img src="screenshots/input.png" alt="Forecast Input" width="100%">
+</td>
+</tr>
+
+<tr>
+<td width="50%">
+<img src="screenshots/forecast-chart.png" alt="Forecast Visualization" width="100%">
+</td>
+<td width="50%">
+<img src="screenshots/forecast-metrics.png" alt="Forecast Metrics" width="100%">
+</td>
+</tr>
+</table>
 
 ---
 
@@ -33,67 +79,97 @@ The system automatically retrieves historical data, generates forecasts using Ti
 
 ---
 
-## Demo Queries
+## Example Forecast Queries
 
 Try the following examples:
 
 * Apple stock price
 * Bitcoin price
 * Tesla stock price
-* S&P 500
+* Microsoft stock price
+* S&P 500 Index
 * Airline passenger demand
-* CO₂ levels
+* Atmospheric CO₂ levels
+* Monthly retail sales
 
 ---
 
-## Architecture
+## System Architecture
 
 ```text
-┌─────────────────────────────────────┐
-│             Frontend                │
-│      React + TypeScript + Vite      │
-└─────────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────┐
-│            FastAPI Backend          │
-│                                     │
-│  • Query Processing                 │
-│  • Data Retrieval                   │
-│  • Forecast Generation              │
-│  • Metrics Calculation              │
-└─────────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────┐
-│       Google TimesFM Model          │
-│     Transformer Forecast Engine     │
-└─────────────────────────────────────┘
-                 │
-                 ▼
-┌─────────────────────────────────────┐
-│      Financial & Economic Data      │
-│  Yahoo Finance + Curated Datasets   │
-└─────────────────────────────────────┘
+┌──────────────────────────────────────────┐
+│               User Query                 │
+│                                          │
+│ "Apple stock price next 30 days"         │
+└──────────────────────────────────────────┘
+                    │
+                    ▼
+┌──────────────────────────────────────────┐
+│         React + TypeScript Frontend      │
+│                                          │
+│ • Query Input                            │
+│ • Forecast Controls                      │
+│ • Interactive Dashboard                  │
+└──────────────────────────────────────────┘
+                    │
+                    ▼
+┌──────────────────────────────────────────┐
+│              FastAPI Backend             │
+│                                          │
+│ • Request Validation                     │
+│ • Query Processing                       │
+│ • Forecast Orchestration                 │
+└──────────────────────────────────────────┘
+                    │
+         ┌──────────┴──────────┐
+         ▼                     ▼
+┌──────────────────┐   ┌──────────────────┐
+│ Historical Data  │   │   TimesFM 2.5    │
+│ Retrieval Layer  │   │ Foundation Model │
+│                  │   │                  │
+│ • Yahoo Finance  │   │ • Forecasting    │
+│ • Economic Data  │   │ • Confidence     │
+└──────────────────┘   └──────────────────┘
+         │                     │
+         └──────────┬──────────┘
+                    ▼
+┌──────────────────────────────────────────┐
+│         Forecast Generation Layer        │
+│                                          │
+│ • Mean Prediction                        │
+│ • Upper Confidence Bound                 │
+│ • Lower Confidence Bound                 │
+│ • Trend Metrics                          │
+└──────────────────────────────────────────┘
+                    │
+                    ▼
+┌──────────────────────────────────────────┐
+│           Interactive Dashboard          │
+│                                          │
+│ • Forecast Chart                         │
+│ • Confidence Intervals                   │
+│ • Trend Analysis                         │
+│ • Summary Metrics                        │
+└──────────────────────────────────────────┘
 ```
 
 ---
 
 ## Tech Stack
 
-| Layer                | Technology              |
-| -------------------- | ----------------------- |
-| Frontend             | React 19                |
-| Language             | TypeScript              |
-| Build Tool           | Vite                    |
-| Backend              | FastAPI                 |
-| API Server           | Uvicorn                 |
-| Forecasting Model    | Google TimesFM-2.5-200M |
-| Market Data          | yfinance                |
-| Data Analysis        | NumPy, Pandas           |
-| Statistical Datasets | statsmodels             |
-| Visualization        | Recharts                |
-| Styling              | Tailwind CSS            |
+| Layer                | Technology                |
+| -------------------- | ------------------------- |
+| Frontend             | React 19                  |
+| Language             | TypeScript                |
+| Build Tool           | Vite                      |
+| Backend              | FastAPI                   |
+| API Server           | Uvicorn                   |
+| Forecasting Model    | Google TimesFM 2.5 (200M) |
+| Market Data          | Yahoo Finance (yfinance)  |
+| Data Analysis        | NumPy, Pandas             |
+| Statistical Datasets | Statsmodels               |
+| Visualization        | Recharts                  |
+| Styling              | Tailwind CSS              |
 
 ---
 
@@ -109,15 +185,20 @@ ForecastIQ/
 │   ├── requirements.txt
 │   └── .env.example
 │
-└── frontend/
-    ├── src/
-    │   ├── App.tsx
-    │   ├── components/
-    │   └── hooks/
-    │
-    ├── package.json
-    ├── vite.config.ts
-    └── index.html
+├── frontend/
+│   ├── src/
+│   ├── components/
+│   ├── hooks/
+│   ├── package.json
+│   └── vite.config.ts
+│
+├── screenshots/
+│   ├── homepage.png
+│   ├── input.png
+│   ├── forecast-chart.png
+│   └── forecast-metrics.png
+│
+└── README.md
 ```
 
 ---
@@ -128,10 +209,7 @@ ForecastIQ/
 
 * Python 3.10+
 * Node.js 18+
-* 2 GB available storage
-* Internet connection for first model download
-
----
+* Internet connection for initial model download
 
 ### Clone Repository
 
@@ -139,8 +217,6 @@ ForecastIQ/
 git clone https://github.com/sonisiiuu7/ForecastIQ.git
 cd ForecastIQ
 ```
-
----
 
 ### Backend Setup
 
@@ -162,15 +238,7 @@ copy .env.example .env
 python main.py
 ```
 
-Backend runs on:
-
-```text
-http://localhost:8000
-```
-
-On first startup, TimesFM model weights will be downloaded and cached locally.
-
----
+The TimesFM model will automatically download and cache during the first launch.
 
 ### Frontend Setup
 
@@ -182,12 +250,6 @@ cd frontend
 npm install
 
 npm run dev
-```
-
-Frontend runs on:
-
-```text
-http://localhost:5173
 ```
 
 ---
@@ -224,7 +286,7 @@ http://localhost:5173
 
 Generate forecasts from natural-language queries.
 
-Example request:
+Example Request:
 
 ```json
 {
@@ -235,7 +297,7 @@ Example request:
 }
 ```
 
-Example response:
+Example Response:
 
 ```json
 {
@@ -245,8 +307,6 @@ Example response:
   "metrics": {}
 }
 ```
-
----
 
 ### GET /health
 
@@ -267,16 +327,16 @@ Returns application health status.
 * Export forecasts to CSV
 * Multi-asset comparison dashboard
 * User authentication
-* Cloud deployment automation
+* Cloud deployment support
 * Additional forecasting models
 
 ---
 
 ## Disclaimer
 
-Forecasts generated by ForecastIQ are intended for educational and research purposes only.
+ForecastIQ is intended for educational, research, and experimentation purposes.
 
-The application does not provide financial advice, investment recommendations, or guarantees regarding future performance. Historical trends do not guarantee future outcomes.
+Forecasts generated by the application should not be interpreted as financial advice, investment recommendations, or guarantees of future performance. Historical trends do not guarantee future outcomes.
 
 ---
 
