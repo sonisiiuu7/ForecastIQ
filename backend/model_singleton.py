@@ -1,5 +1,5 @@
 """
-TimesFM Model Singleton for ChronoSight backend.
+TimesFM Model Singleton for ForecastIQ backend.
 Loads and manages the google/timesfm-2.5-200m-transformers model.
 """
 import torch

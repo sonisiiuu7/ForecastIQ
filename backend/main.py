@@ -1,5 +1,5 @@
 """
-FastAPI backend for ChronoSight time series forecasting tool.
+FastAPI backend for ForecastIQ time series forecasting tool.
 """
 import os
 from dotenv import load_dotenv
@@ -19,7 +19,7 @@ from data_fetcher import data_fetcher, DataNotAvailableError
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
-app = FastAPI(title="ChronoSight API", version="1.0.0")
+app = FastAPI(title="ForecastIQ API", version="1.0.0")
 
 # CORS origins — comma-separated list in CORS_ORIGINS env var, defaults to localhost dev server
 _cors_origins = [o.strip() for o in os.getenv("CORS_ORIGINS", "http://localhost:5173").split(",") if o.strip()]
@@ -48,7 +48,7 @@ class ForecastResponse(BaseModel):
 
 @app.get("/")
 async def root():
-    return {"message": "ChronoSight API is running", "version": "1.0.0"}
+    return {"message": "ForecastIQ API is running", "version": "1.0.0"}
 
 
 @app.get("/health")

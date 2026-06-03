@@ -1,5 +1,5 @@
 """
-Data fetcher for ChronoSight backend.
+Data fetcher for ForecastIQ backend.
 Routes natural language queries to real data sources only:
 - Financial tickers via yfinance
 - Economic indicators via statsmodels
